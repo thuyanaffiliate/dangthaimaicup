@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="icon" type="image/x-icon" href="logo_giai.png">
+  <meta charset="UTF-8">
+  <title>ĐẶNGTHAIMAI CUP 2025-2026</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('sanbong.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, rgba(180,0,0,0.95), rgba(220,0,0,0.85));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    header img.logo-left {
+      height: 80px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    }
+    header .logos-right {
+      display: flex;
+      gap: 12px;
+    }
+    header .logos-right img {
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px rgba(255,255,255,0.9);
+    }
+    header .logos-right img:hover {
+      transform: scale(1.2) rotate(5deg);
+    }
+    header h1 {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+      font-weight: bold;
+    }
+    header img.logo-extra {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 14px rgba(255,255,255,0.95);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 3px solid #b40000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+    }
+    nav button {
+      background: none;
+      border: none;
+      padding: 15px 35px;
+      cursor: pointer;
+      font-size: 17px;
+      color: #b40000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav button:hover {
+      background: #ffd6d6;
+      border-radius: 8px;
+      transform: translateY(-2px);
+    }
+    nav button.active {
+      border-bottom: 4px solid #b40000;
+      color: #ff1a1a;
+    }
+    .section {
+      display: none;
+      padding: 30px;
+      max-width: 1000px;
+      margin: 30px auto;
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      text-align: center;
+      color: #b40000;
+      margin-bottom: 25px;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    h2::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: -40px;
+      font-size: 26px;
+      color: #b40000;
+    }
+    h3 {
+      color: #444;
+      margin: 15px 0 10px;
+      text-align: center;
+    }
+    .ranking {
+      margin: 25px 0;
+      text-align: center;
+    }
+    .ranking img {
+      width: 90%;
+      max-width: 500px;
+      border: 3px solid #b40000;
+      border-radius: 14px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ranking img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    table, th, td {
+      border: 1px solid #b40000;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      font-size: 15px;
+    }
+    th {
+      background: linear-gradient(90deg, #b40000, #e60000);
+      color: white;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    tr:nth-child(even) {
+      background: #ffeaea;
+    }
+    .win { color: green; font-weight: bold; }
+    .lose { color: red; font-weight: bold; }
+    .draw { color: orange; font-weight: bold; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: #fff;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+      text-align: left;
+    }
+    .product-info h4 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #b40000;
+    }
+    .product-info p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    .product-info a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #b40000;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .product-info a:hover {
+      background: #ff1a1a;
+    }
+     /* FOOTER */
+    footer {
+      background: linear-gradient(90deg, #b40000, #e60000);
+      color: white;
+      padding: 40px 20px 20px;
+      margin-top: 40px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+    }
+    .footer-content {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+    .footer-content h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+    .footer-content p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .socials a svg {
+      width: 36px;
+      height: 36px;
+      fill: white;
+      background: rgba(255,255,255,0.1);
+      padding: 8px;
+      border-radius: 50%;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .socials a svg:hover {
+      transform: scale(1.2) rotate(10deg);
+      background: rgba(255,255,255,0.3);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.4);
+      padding-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo_giai.png" alt="Logo Giải" class="logo-left">
+    <h1>GIẢI BÓNG ĐÁ ĐẶNGTHAIMAI CUP 2025-2026</h1>
+    <div class="logos-right">
+      <img src="11C2.png" alt="11C2">
+      <img src="11A1.png" alt="11A1">
+      <img src="11A2.png" alt="11A2">
+      <img src="11B.png" alt="11B">
+      <img src="12A2.jpeg" alt="12A2">
+      <img src="12a3.png" alt="12A3">
+      <img src="12b.png" alt="12B">
+      <img src="12a1.png" alt="12A1">
+      <img src="12d1.png" alt="11d1">
+      <img src="11D1.png" alt="11d1">
+      <img src="12c1.png" alt="12c1">
+  </header>
+
+  <nav>
+    <button class="active" onclick="showSection('lich')">📅 Lịch thi đấu</button>
+    <button onclick="showSection('bang')">🏆 Bảng xếp hạng</button>
+    <button onclick="showSection('vua')">⚽ Vua phá lưới</button>
+    <button onclick="showSection('ketqua')">📊 Kết quả</button>
+    <button onclick="showSection('sanpham')">🛒 Sản phẩm</button>
+  </nav>
+
+  <div id="lich" class="section active">
+    <h2 data-icon="📅">Lịch thi đấu</h2>
+    <table>
+      <tr>
+        <th>Ngày</th>
+        <th>Trận đấu</th>
+        <th>Nội dung</th>
+        <th>Vòng đấu</th>
+        <th>Bảng đấu</th>
+        <th>Sân</th>
+      </tr>
+      <tr><td>17:00-11/09/2025</td><td>12A1-A1K58  VS  12A3-A3K58</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
+      <tr><td>18:00-11/09/2025</td><td>11A2-A2K59  VS  11B-BK59</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
+      <tr><td>17:00-12/09/2025</td><td>12C1-C1K58  VS  12D1-D1K58</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
+      <tr><td>18:00-12/09/2025</td><td>11A1-A1K59  VS  11D1-D1K59</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
+    </table>
+  </div>
+
+  <div id="bang" class="section">
+    <h2 data-icon="🏆">Bảng xếp hạng</h2>
+    <div class="ranking">
+      <h3>Bảng A</h3>
+      <img src="BẢNG A.png" alt="Bảng A">
+    </div>
+    <div class="ranking">
+      <h3>Bảng B</h3>
+      <img src="BẢNG B.png" alt="Bảng B">
+    </div>
+  </div>
+
+  <div id="vua" class="section">
+    <h2 data-icon="⚽">Vua phá lưới</h2>
+    <table>
+      <tr>
+        <th>Cầu thủ</th>
+        <th>Đội</th>
+        <th>Số bàn</th>
+      </tr>
+      <tr>
+        <td>Nguyễn Văn A</td>
+        <td>12A1</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Trần Văn B</td>
+        <td>11B</td>
+        <td>2</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="ketqua" class="section">
+    <h2 data-icon="📊">Kết quả thi đấu</h2>
+    <table>
+      <tr>
+        <th>Ngày</th>
+        <th>Trận đấu</th>
+        <th>Tỉ số</th>
+        <th>Ghi chú</th>
+      </tr>
+      <tr>
+        <td>10/09/2025</td>
+        <td>12A1-A1K58 vs 12A3-A3K58</td>
+        <td class="draw">1 - 1</td>
+        <td>Hòa</td>
+      </tr>
+      <tr>
+        <td>11/09/2025</td>
+        <td>11A2-A2K59 vs 11B-BK59</td>
+        <td><span class="win">3</span> - <span class="lose">1</span></td>
+        <td>11A2 thắng</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="sanpham" class="section">
+    <h2 data-icon="🛒">Sản phẩm</h2>
+    <div class="products" id="productList"></div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    const products = [
+      {
+        name:"Giày Đá Bóng, Giày Đá Banh VIC 6 VN Đế AIR Zoom, Đệm EVA, Khâu Full Đế ",
+        price:220034,
+        description:" Sport Đá Banh Giày Thể Thao Tập Thể Dục",
+        image:"https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/9b5ca64a72244b1fa8092be1cd6fc83f~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+        link:"https://vt.tiktok.com/ZSHnNqDgNg6V1-AEF6H/",
+        rating:4.6,
+        reviews:1400,
+        sold:130000
+      },
+      {
+        name:"Vớ đá banh, tất đá bóng chống trơn chống trượt bóng đá thương hiệu Wika, hàng cao cấp sẵn hàng, chuyên bán sỉ.",
+        price:10000,
+        description:"Êm chân, chống trơn",
+        image:"https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/5f368681162843cdb21ba853d693b43c~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my2&from=1826719393",
+        link:"https://vt.tiktok.com/ZSHnNqj7CmV6a-aeH5b/",
+        rating:4.8,
+        reviews:462,
+        sold:14000
+      },
+      {
+        name:"Giày Đá Bóng Sport Đá Banh Vải Rap Đế Cổ Chun Đế Đệm Cao Cấp Tặng Tất, Túi Rút Cao Cấp ",
+        price:253000,
+        description:"Sneaker giay bong da",
+        image:"https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/409da4407ee14302be9498a128494b04~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my2&from=1826719393",
+        link:"https://vt.tiktok.com/ZSHnNqxpWEJus-B3zkj/",
+        rating:4.7,
+        reviews:1400,
+        sold:39000
+      },
+      {
+        name:"Băng keo thể thao hộp 24 & 30 cuộn cuốn cổ chân cổ tay chấn tránh chấn thương hỗ trợ thi đấu và tập luyện",
+        price:100000,
+        description:"Tránh Chấn Thương",
+        image:"https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/56b78b135aab4aa3be4281d9d90365ba~tplv-o3syd03w52-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+        link:"https://vt.tiktok.com/ZSHnNq7FBLxdK-ZFpgH/",
+        rating:4.8,
+        reviews:4400,
+        sold:61200
+      }
+    ];
+
+    const productList = document.getElementById('productList');
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <div class="product-info">
+          <h4>${p.name}</h4>
+          <p><strong>Giá:</strong> ${p.price.toLocaleString()}₫</p>
+          <p><strong>Mô tả:</strong> ${p.description}</p>
+          <p><strong>Đánh giá:</strong> ⭐ ${p.rating} (${p.reviews} đánh giá)</p>
+          <p><strong>Đã bán:</strong> ${p.sold}</p>
+          <a href="${p.link}" target="_blank">Mua ngay</a>
+        </div>
+      `;
+      productList.appendChild(card);
+    });
+</script>
+</body>
+</html>
+<!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <h3>ĐẶNGTHAIMAI CUP</h3>
+      <p>Giải bóng đá giao lưu học sinh năm học 2025-2026.<br>
+      Cập nhật liên tục kết quả, bảng xếp hạng và tin tức mới nhất.</p>
+      <div class="socials">
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/profile.php?id=61558069036683" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.2l-.4 3h-1.8v7A10 10 0 0 0 22 12"/>
+    </svg>
+  </a>
+
+  <!-- TikTok -->
+<a href="https://www.tiktok.com/@u18dtmtc2" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36">
+    <path fill="#25F4EE" d="M42,15.1c-2.6-0.5-5-1.9-6.9-3.9c-1.9-2-3-4.6-3.1-7.4h-5.9v27.4c0,3.6-2.9,6.6-6.5,6.6s-6.5-2.9-6.5-6.5
+    c0-3.6,2.9-6.5,6.5-6.5c0.6,0,1.2,0.1,1.7,0.2v-6.1c-0.6-0.1-1.1-0.1-1.7-0.1c-6.9,0-12.6,5.6-12.6,12.6s5.6,12.6,12.6,12.6
+    s12.6-5.6,12.6-12.6V18.7c2.5,1.8,5.4,2.9,8.6,3.1V15.1z"/>
+    <path fill="#FE2C55" d="M35.1,18.7v5.7c-3.2-0.2-6.1-1.3-8.6-3.1v13.3c0,7-5.6,12.6-12.6,12.6S1.3,41.6,1.3,34.6
+    c0-7,5.6-12.6,12.6-12.6c0.6,0,1.2,0.1,1.7,0.1v6.1c-0.6-0.1-1.1-0.2-1.7-0.2c-3.6,0-6.5,2.9-6.5,6.5c0,3.6,2.9,6.5,6.5,6.5
+    s6.5-2.9,6.5-6.5V3.8h5.9c0.1,2.8,1.2,5.4,3.1,7.4c1.9,2,4.3,3.4,6.9,3.9v5.7C39.5,20.8,37.4,19.9,35.1,18.7z"/>
+  </svg>
+</a>
+</div>
