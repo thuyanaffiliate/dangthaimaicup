@@ -327,15 +327,44 @@
   </header>
 
   <nav>
-    <button class="active" onclick="showSection('lich')">📅 Lịch thi đấu</button>
-    <button onclick="showSection('bang')">🏆 Bảng xếp hạng</button>
-    <button onclick="showSection('vua')">⚽ Vua phá lưới</button>
-    <button onclick="showSection('ketqua')">📊 Kết quả</button>
-    <button onclick="showSection('sanpham')">🛒 Sản phẩm</button>
-    <button onclick="showSection('cacuoc')">💰 Cá cược</button>
+<button class="active" onclick="showSection('home', this)">🏠 Trang chủ</button>
+<button onclick="showSection('lich', this)">📅 Lịch thi đấu</button>
+<button onclick="showSection('bang', this)">🏆 Bảng xếp hạng</button>
+<button onclick="showSection('vua', this)">⚽ Vua phá lưới</button>
+<button onclick="showSection('ketqua', this)">📊 Kết quả</button>
+<button onclick="showSection('sanpham', this)">🛒 Sản phẩm</button>
+<button onclick="showSection('cacuoc', this)">💰 Cá cược</button>
   </nav>
+   </div>
+  <div id="home" class="section active">
+  <h2 data-icon="🏠">Trang chủ</h2>
+  <div style="text-align:center;">
+    
+  <section id="homepageHighlights" class="max-w-6xl mx-auto mt-6 grid md:grid-cols-3 gap-6">
+  <!-- Tâm Điểm -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-bold mb-3">🔥 Tâm Điểm</h2>
+    <ul id="focusMatches" class="space-y-2"></ul>
+    
 
-  <div id="lich" class="section active">
+  <!-- Lịch -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-bold mb-3">📅 Lịch</h2>
+    <ul id="upcomingMatches" class="space-y-2"></ul>
+    <img src="lich.png"style="max-width:50%; border-radius:5px; box-shadow:0 6px 20px rgba(0,0,0,0.3);">
+  </div>
+
+  <!-- Kết Quả -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-bold mb-3">✅ Kết Quả</h2>
+    <ul id="recentMatches" class="space-y-2"></ul>
+    <img src="lich.png"style="max-width:50%; border-radius:5px; box-shadow:0 6px 20px rgba(0,0,0,0.3);">
+  </div>
+</section>
+
+  </div>
+</div>
+  <div id="lich" class="section">
     <h2 data-icon="📅">Lịch thi đấu</h2>
     <table>
       <tr>
@@ -346,13 +375,14 @@
         <th>Bảng đấu</th>
         <th>Sân</th>
       </tr>
-      <tr><td>17:00-11/09/2025</td><td>12A1-A1K58  VS  12A3-A3K58</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
-      <tr><td>18:00-11/09/2025</td><td>11A2-A2K59  VS  11B-BK59</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
-      <tr><td>17:00-12/09/2025</td><td>11A1-A1K59  VS  11D1-D1K59</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
-      <tr><td>18:00-12/09/2025</td><td>12C1-C1K58  VS  12D1-D1K58</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
+      <tr><td>17:00-11/09/2025</td><td>12A1  VS  12A3</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
+      <tr><td>18:00-11/09/2025</td><td>11A2  VS  11B</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
+      <tr><td>17:00-12/09/2025</td><td>11A1  VS  11D1</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B</B></td><td>Sân Bóng Dũng Kim</td></tr>
+      <tr><td>18:00-12/09/2025</td><td>12C1  VS  12D1</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A </td><td>Sân Bóng Dũng Kim</td></tr>  
+      <tr><td>17:00-13/09/2025</td><td>12A2  VS  11D1</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng A</td><td>Sân Bóng Dũng Kim</td></tr>
+      <tr><td>18:00-13/09/2025</td><td>12B1  VS  11D2+D3</td><td>Vòng Bảng</td><td>Vòng 1</td><td>Bảng B </td><td>Sân Bóng Dũng Kim</td></tr>  
     </table>
   </div>
-
   <div id="bang" class="section">
     <h2 data-icon="🏆">Bảng xếp hạng</h2>
     <div class="ranking">
@@ -374,14 +404,14 @@
         <th>Số bàn</th>
       </tr>
       <tr>
-        <td>Nguyễn Văn A</td>
-        <td>12A1</td>
-        <td>3</td>
+        <td>Cập Nhật Sau</td>
+        <td>Cập Nhật Sau</td>
+        <td>Cập Nhật Sau</td>
       </tr>
       <tr>
-        <td>Trần Văn B</td>
-        <td>11B</td>
-        <td>2</td>
+        <td>Cập Nhật Sau</td>
+        <td>Cập Nhật Sau</td>
+        <td>Cập Nhật Sau</td>
       </tr>
     </table>
   </div>
@@ -392,20 +422,51 @@
       <tr>
         <th>Ngày</th>
         <th>Trận đấu</th>
+        <th>Bảng đấu</th>
         <th>Tỉ số</th>
         <th>Ghi chú</th>
       </tr>
       <tr>
-        <td>10/09/2025</td>
-        <td>12A1-A1K58 vs 12A3-A3K58</td>
+        <td>11/09/2025</td>
+        <td>Bảng A</td>
+        <td>12A1 vs 12A3</td>
         <td class="draw">1 - 1</td>
         <td>Hòa</td>
       </tr>
       <tr>
         <td>11/09/2025</td>
-        <td>11A2-A2K59 vs 11B-BK59</td>
+        <td>Bảng B</td>
+        <td>11A2 vs 11B</td>
         <td><span class="win">3</span> - <span class="lose">1</span></td>
         <td>11A2 thắng</td>
+      </tr>
+      <tr>
+        <td>12/09/2025</td>
+        <td>Bảng A</td>
+        <td>12D1 vs 12D1</td>
+        <td><span class="win">2</span> - <span class="lose">1</span></td>
+        <td>12D1 thắng</td>
+      </tr>
+      <tr>
+        <td>12/09/2025</td>
+        <td>Bảng B</td>
+        <td>11A1 vs 11D1</td>
+        <td><span class="lose">1</span> - <span class="win">2</span></td>
+        <td>11D1 thắng</td>
+      </tr>
+      <tr>
+        <td>13/09/2025</td>
+        <td>Bảng A</td>
+        <td>12A2 vs 10C2</td>
+        <td class="draw">Chưa Xác Định</td>
+        <td>Chưa Xác Định</td>
+      </tr>
+      <tr>
+        <td>13/09/2025</td>
+        <td>Bảng B</td>
+        <td>12B vs 11D2+C4</td>
+        <td class="draw">Chưa Xác Định</td>
+        <td>Chưa Xác Định</td>
       </tr>
     </table>
   </div>
@@ -505,8 +566,8 @@
     <button onclick="logout()">Đăng xuất</button>
 
     <h3>🎯 Đặt cược</h3>
-<table border="1" cellspacing="0" cellpadding="8" style="width:100%; text-align:center; background:#222; color:#fff; border-collapse:collapse;">
-  <thead style="background:#c00;">
+<table border="1" cellspacing="0" cellpadding="8" style="width:100%; text-align:center; background:#ffffff; color:#110b0b; border-collapse:collapse;">
+  <thead style="background:rgb(249, 141, 0);">
     <tr>
       <th>Thời gian</th>
       <th>Trận đấu</th>
@@ -521,7 +582,7 @@
       <td>17:00 - 12/09/2025</td>
       <td>12C1 vs 12D1</td>
       <td>Bảng A</td>
-      <td>
+      <td>  
   <input type="range" id="betAmount" min="1000" max="500000" step="1000" value="2000" oninput="updateBetValue(this.value)">
   <br>
   <input type="number" id="betAmountInput" min="1000" step="1000" value="2000" oninput="syncSlider(this.value)">
@@ -532,6 +593,23 @@
       <td><button onclick="bet('12C1', getBetAmount())">Cược</button></td>
       <td><button onclick="bet('12D1', getBetAmount())">Cược</button></td>
     </tr>
+    
+    <tr>
+      <td>17:00 - 13/09/2025</td>
+      <td>12A2 vs 11C2</td>
+      <td>Bảng A</td>
+      <td>  
+  <input type="range" id="betAmount" min="1000" max="500000" step="1000" value="2000" oninput="updateBetValue(this.value)">
+  <br>
+  <input type="number" id="betAmountInput" min="1000" step="1000" value="2000" oninput="syncSlider(this.value)">
+  <button onclick="betAll()">ALL</button>
+  <div><span id="betValue">2000</span> VNĐ</div>
+</td>
+
+      <td><button onclick="bet('12A2', getBetAmount())">Cược</button></td>
+      <td><button onclick="bet('11C2', getBetAmount())">Cược</button></td>
+    </tr>
+  
   </tbody>
 </table>
 
@@ -601,23 +679,7 @@
     <input type="text" id="bonusUser" placeholder="Tên tài khoản">
     <input type="number" id="bonusAmount" placeholder="Số tiền VNĐ">
     <button onclick="addBonus()">Cộng tiền</button>
-
   </div>
-<div id="ketqua" class="section">
-  <h2 data-icon="📊">Kết quả</h2>
-  <table border="1" cellspacing="0" cellpadding="8" style="width:100%; text-align:center; border-collapse:collapse; background:#222; color:#fff;">
-    <thead style="background:#c00;">
-      <tr>
-        <th>Thời gian</th>
-        <th>Trận đấu</th>
-        <th>Bảng</th>
-        <th>Kết quả</th>
-      </tr>
-    </thead>
-    <tbody id="resultsTable"></tbody>
-  </table>
-</div>
-
 </div>
 <script>
   let users = JSON.parse(localStorage.getItem("users") || "{}");
@@ -944,3 +1006,4 @@ function addBonus(){
   </svg>
 </a>
 </div>
+
